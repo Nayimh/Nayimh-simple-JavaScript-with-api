@@ -29,16 +29,16 @@ const loadBooks = () => {
         
     fetch(url)
         .then(res => res.json())
-        .then(data => displayBooks(data.docs));
+        .then(data => displayBooks(data));
         searchNumber.style.display = 'block';
        
 }
 
 // displey section
 const displayBooks = Books => {
-        
+    const booklist = Books.docs;
 //   error message
-    if (Books.length === 0) {  
+    if (booklist.length === 0) {  
     errorMessage.innerText = "no result found!";
     searchNumber.style.display = 'none';
         searchNumber.textContent = '';
@@ -53,10 +53,10 @@ else {
     bookContainer.textContent = '';
     
     // show number
-    searchNumber.innerText = `Total Number is: ${Books.length}`
+    searchNumber.innerText = `Total Number is: ${booklist.length} of ${Books.numFound}`
     
     // loop 
-    Books.forEach(book => {
+    booklist.forEach(book => {
         const div = document.createElement('div');
         div.className = "col";
         div.innerHTML = `
